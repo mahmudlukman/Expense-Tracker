@@ -6,8 +6,11 @@ import compression from "compression";
 import helmet from "helmet";
 import dotenv from "dotenv";
 import limiter from "./utils/rateLimiter";
-// import userRouter from "./routes/user.route";
-// import limiter from "./utils/rateLimiter";
+import userRouter from "./routes/user.route";
+import authRouter from "./routes/auth.route";
+import incomeRouter from "./routes/income.route";
+import expenseRouter from "./routes/expense.route";
+import dashboardRouter from "./routes/dashboard.route";
 
 export const app = express();
 //config
@@ -44,11 +47,14 @@ app.use(helmet());
 app.use(limiter);
 
 //routes
-// app.use(
-//   "/api/v1",
-//   authRouter,
-//   userRouter,
-// );
+app.use(
+  "/api/v1",
+  authRouter,
+  userRouter,
+  incomeRouter,
+  expenseRouter,
+  dashboardRouter
+);
 
 //testing route
 app.get("/test", (req: Request, res: Response, next: NextFunction) => {

@@ -1,8 +1,8 @@
-import User from "../model/User.model";
 import ErrorHandler from "../utils/errorHandler";
 import { catchAsyncError } from "../middleware/catchAsyncError";
 import { NextFunction, Request, Response } from "express";
 import Income from "../model/Income.model";
+import xlsx from "xlsx";
 
 // @desc    Add a new income record
 // @route   GET /api/v1/income
@@ -15,7 +15,7 @@ export const addIncome = catchAsyncError(
 
       // Validation: Check for missing fields
       if (!source || !amount || !date) {
-        return res.status(400).json({ message: "All fields are required" });
+        return next(new ErrorHandler("All fields are required", 400));
       }
 
       const newIncome = new Income({
@@ -55,11 +55,37 @@ export const getAllIncome = catchAsyncError(
 export const deleteIncome = catchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const userId = req.user?._id;
       await Income.findByIdAndDelete(req.params.id);
       res
         .status(200)
         .json({ success: true, message: "Income deleted successfully" });
+    } catch (error: any) {
+      return next(new ErrorHandler(error.message, 400));
+    }
+  }
+);
+
+// @desc    Download income records as an Excel file
+// @route   GET /api/v1/download-income-excel
+// @access  Private (Requires access token)
+export const downloadIncomeExcel = catchAsyncError(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const userId = req.user?._id;
+      const income = await Income.find({ userId }).sort({ date: -1 });
+
+      // Prepare data for Excel
+      const data = income.map((item) => ({
+        Source: item.source,
+        Amount: item.amount,
+        Date: item.date,
+      }));
+
+      const wb = xlsx.utils.book_new();
+      const ws = xlsx.utils.json_to_sheet(data);
+      xlsx.utils.book_append_sheet(wb, ws, "Income");
+      xlsx.writeFile(wb, "income_details.xlsx");
+      res.download("income_details.xlsx");
     } catch (error: any) {
       return next(new ErrorHandler(error.message, 400));
     }
