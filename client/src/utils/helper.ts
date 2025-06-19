@@ -30,13 +30,14 @@ export const addThousandsSeparator = (num: number) => {
 };
 
 interface ExpenseData {
-  category: string;
+  category?: string;
   amount: number;
+  date: string;
 }
 
 export const prepareExpenseBarChartData = (data: ExpenseData[] = []) => {
   const chartData = data.map((item) => ({
-    category: item?.category,
+    category: item?.category || "Unknown", // Provide default value
     amount: item?.amount,
   }));
 
@@ -63,12 +64,6 @@ export const prepareIncomeBarChartData = (data: IncomeData[] = []) => {
   return chartData;
 };
 
-interface ExpenseData {
-  date: string;
-  amount: number;
-  category: string;
-}
-
 export const prepareExpenseLineChartData = (data: ExpenseData[] = []) => {
   const sortedData = [...data].sort(
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
@@ -77,7 +72,7 @@ export const prepareExpenseLineChartData = (data: ExpenseData[] = []) => {
   const chartData = sortedData.map((item) => ({
     month: moment(item?.date).format("Do MMM"),
     amount: item?.amount,
-    category: item?.category,
+    category: item?.category|| "Uncategorized", // Provide default value,
   }));
 
   return chartData;

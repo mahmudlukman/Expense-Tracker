@@ -14,3 +14,12 @@ export interface RootState {
     } | null;
   };
 }
+
+interface Transaction {
+  _id: string;
+  category: string;
+  icon: string;
+  date: string;
+  amount: number;
+  source: string;
+}
