@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { userLoggedIn } from "../auth/authSlice";
 
 export const apiSlice = createApi({
-  tagTypes: ["User", "Task", "Report", "Notifications"],
+  tagTypes: ["User", "Income", "Expense", "Dashboard"],
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl:
