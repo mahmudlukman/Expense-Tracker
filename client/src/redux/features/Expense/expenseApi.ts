@@ -37,7 +37,7 @@ export const expenseApi = apiSlice.injectEndpoints({
         method: "DELETE",
         credentials: "include" as const,
       }),
-      invalidatesTags: (result, error, expenseId) => [
+      invalidatesTags: (_result, _error, expenseId) => [
         { type: "Expense", id: expenseId },
         { type: "Expense", id: "LIST" },
       ],

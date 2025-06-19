@@ -3,10 +3,16 @@ import Input from "../Inputs/Input";
 import EmojiPickerPopup from "../EmojiPickerPopup";
 
 interface IncomeFormProps {
-  onAddIncome: (income: { source: string; amount: string; date: string; icon: string }) => void;
+  onAddIncome: (income: {
+    source: string;
+    amount: string;
+    date: string;
+    icon: string;
+  }) => void;
+  isLoading: boolean;
 }
 
-const AddIncomeForm = ({onAddIncome}: IncomeFormProps) => {
+const AddIncomeForm = ({ onAddIncome }: IncomeFormProps) => {
   const [income, setIncome] = useState({
     source: "",
     amount: "",
@@ -14,7 +20,8 @@ const AddIncomeForm = ({onAddIncome}: IncomeFormProps) => {
     icon: "",
   });
 
-  const handleChange = (key: string, value: string) => setIncome({ ...income, [key]: value });
+  const handleChange = (key: string, value: string) =>
+    setIncome({ ...income, [key]: value });
 
   return (
     <div>
@@ -51,7 +58,7 @@ const AddIncomeForm = ({onAddIncome}: IncomeFormProps) => {
         <button
           type="button"
           className="add-btn add-btn-fill"
-          onClick={()=>onAddIncome(income)}
+          onClick={() => onAddIncome(income)}
         >
           Add Income
         </button>

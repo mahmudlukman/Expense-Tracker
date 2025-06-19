@@ -37,7 +37,7 @@ export const incomeApi = apiSlice.injectEndpoints({
         method: "DELETE",
         credentials: "include" as const,
       }),
-      invalidatesTags: (result, error, incomeId) => [
+      invalidatesTags: (_result, _error, incomeId) => [
         { type: "Income", id: incomeId },
         { type: "Income", id: "LIST" },
       ],

@@ -50,7 +50,12 @@ interface IncomeData {
   source: string;
 }
 
-export const prepareIncomeBarChartData = (data: IncomeData[] = []) => {
+export const prepareIncomeBarChartData = (data: IncomeData[] | null | undefined = []) => {
+  if (!Array.isArray(data)) {
+    // console.warn("prepareIncomeBarChartData: Expected an array, received:", data);
+    return [];
+  }
+
   const sortedData = [...data].sort(
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
@@ -63,6 +68,20 @@ export const prepareIncomeBarChartData = (data: IncomeData[] = []) => {
 
   return chartData;
 };
+
+// export const prepareIncomeBarChartData = (data: IncomeData[] = []) => {
+//   const sortedData = [...data].sort(
+//     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+//   );
+
+//   const chartData = sortedData.map((item) => ({
+//     month: moment(item?.date).format("Do MMM"),
+//     amount: item?.amount,
+//     source: item?.source,
+//   }));
+
+//   return chartData;
+// };
 
 export const prepareExpenseLineChartData = (data: ExpenseData[] = []) => {
   const sortedData = [...data].sort(

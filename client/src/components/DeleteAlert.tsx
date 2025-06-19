@@ -1,6 +1,7 @@
 interface DeleteAlertProps {
   content: string;
   onDelete: () => void;
+  isLoading?: boolean;
 }
 
 const DeleteAlert = ({ content, onDelete }: DeleteAlertProps) => {
@@ -14,7 +15,7 @@ const DeleteAlert = ({ content, onDelete }: DeleteAlertProps) => {
           className="add-btn add-btn-fill"
           onClick={onDelete}
         >
-          Delete 
+          Delete
         </button>
       </div>
     </div>
