@@ -22,15 +22,15 @@ interface IncomeFormData {
 
 const Income = () => {
   const {
-    data: incomeResponse = [],
+    data,
     isLoading: loading,
     isError,
     error,
     refetch,
   } = useGetIncomesQuery({ refetchOnMountOrArgChange: true });
 
-  const incomeData = incomeResponse?.income || incomeResponse || [];
-  console.log("Income Data:", incomeData);
+  const incomeData = data?.income || data || [];
+  
   const [addIncome, { isLoading: isAddingIncome }] = useAddIncomeMutation();
   const [deleteIncome, { isLoading: isDeletingIncome }] =
     useDeleteIncomeMutation();

@@ -7,9 +7,17 @@ interface ExpenseListProps {
   transactions: Transaction[];
   onDelete: (id: string) => void;
   onDownload: () => void;
+  isDownloading: boolean;
 }
 
-const ExpenseList = ({ transactions, onDelete, onDownload }: ExpenseListProps) => {
+const ExpenseList = ({
+  transactions,
+  onDelete,
+  onDownload,
+}: ExpenseListProps) => {
+  // Ensure transactions is always an array
+  const safeTransactions = Array.isArray(transactions) ? transactions : [];
+
   return (
     <div className="card">
       <div className="flex items-center justify-between">
@@ -21,17 +29,23 @@ const ExpenseList = ({ transactions, onDelete, onDownload }: ExpenseListProps) =
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2">
-        {transactions?.map((expense) => (
-          <TransactionInfoCard
-            key={expense._id}
-            title={expense.category}
-            icon={expense.icon}
-            date={moment(expense.date).format("Do MMM YYYY")}
-            amount={expense.amount}
-            type="expense"
-            onDelete={() => onDelete(expense._id)}
-          />
-        ))}
+        {safeTransactions.length > 0 ? (
+          safeTransactions.map((expense) => (
+            <TransactionInfoCard
+              key={expense._id}
+              title={expense.category}
+              icon={expense.icon}
+              date={moment(expense.date).format("Do MMM YYYY")}
+              amount={expense.amount}
+              type="expense"
+              onDelete={() => onDelete(expense._id)}
+            />
+          ))
+        ) : (
+          <div className="col-span-full text-center py-8 text-gray-500">
+            No income records found
+          </div>
+        )}
       </div>
     </div>
   );
