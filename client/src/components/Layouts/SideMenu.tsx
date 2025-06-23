@@ -1,13 +1,13 @@
 import { SIDE_MENU_DATA } from "../../utils/data";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useLogOutMutation } from "../../redux/features/auth/authApi";
+import { useLogoutMutation } from "../../redux/features/auth/authApi";
 import type { RootState } from "../../@types";
 import CharAvatar from "../Cards/CharAvatar";
 
 const SideMenu = ({ activeMenu }: { activeMenu: string }) => {
   const { user } = useSelector((state: RootState) => state.auth);
-  const [logout, { isLoading: isLoggingOut }] = useLogOutMutation();
+  const [logout, { isLoading: isLoggingOut }] = useLogoutMutation();
   const navigate = useNavigate();
 
   const handleClick = (route: string) => {
