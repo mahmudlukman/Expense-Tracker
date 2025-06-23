@@ -65,8 +65,7 @@ export const authApi = apiSlice.injectEndpoints({
         method: "GET",
         credentials: "include" as const,
       }),
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_arg, { dispatch }) {
         try {
           dispatch(userLoggedOut());
         } catch (error: unknown) {
