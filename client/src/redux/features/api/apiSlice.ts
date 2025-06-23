@@ -6,7 +6,7 @@ export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl:
-      import.meta.env.VITE_PUBLIC_SERVER_URI || "http://localhost:8000/api/v1/",
+      import.meta.env.VITE_PUBLIC_SERVER_URI,
   }),
   endpoints: (builder) => ({
     loadUser: builder.query({
