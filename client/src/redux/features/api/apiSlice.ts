@@ -10,18 +10,14 @@ export const apiSlice = createApi({
   }),
   endpoints: (builder) => ({
     loadUser: builder.query({
-      query: () => {
-        // This query fetches the logged-in user's profile
-        return {
-          url: "me",
-          method: "GET",
-          credentials: "include",
-        };
-      },
+      query: () => ({
+        url: "me",
+        method: "GET",
+        credentials: "include" as const,
+      }),
       async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          // If the query is successful, dispatch the userLoggedIn action
           dispatch(
             userLoggedIn({
               accessToken: result.data.accessToken,
@@ -29,10 +25,9 @@ export const apiSlice = createApi({
             })
           );
         } catch (error) {
-          console.error("loadUser error:", error);
+          console.log(error);
         }
       },
-      providesTags: ["User"],
     }),
   }),
 });
