@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: [
-      "https://codepence-expense-tracker.netlify.app/",
+      "https://codepence-expense-tracker.netlify.app",
       "http://localhost:5173",
     ],
     credentials: true,
