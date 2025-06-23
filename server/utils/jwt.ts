@@ -20,6 +20,7 @@ export const accessTokenOptions: ITokenOptions = {
   maxAge: accessTokenExpire * 60 * 60 * 1000,
   httpOnly: true,
   sameSite: "lax",
+  secure: true,
 };
 
 export const sendToken = (user: IUser, statusCode: number, res: Response) => {

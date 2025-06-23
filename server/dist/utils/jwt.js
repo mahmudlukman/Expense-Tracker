@@ -14,6 +14,7 @@ exports.accessTokenOptions = {
     maxAge: accessTokenExpire * 60 * 60 * 1000,
     httpOnly: true,
     sameSite: "lax",
+    secure: true,
 };
 const sendToken = (user, statusCode, res) => {
     const accessToken = user.SignAccessToken();

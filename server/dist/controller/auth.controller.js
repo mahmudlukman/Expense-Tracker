@@ -79,7 +79,7 @@ exports.logoutUser = (0, catchAsyncError_1.catchAsyncError)(async (req, res, nex
             maxAge: 1,
             httpOnly: true,
             secure: true,
-            sameSite: "none",
+            sameSite: "lax",
         });
         res
             .status(200)

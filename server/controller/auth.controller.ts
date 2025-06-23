@@ -90,7 +90,7 @@ export const logoutUser = catchAsyncError(
         maxAge: 1,
         httpOnly: true,
         secure: true,
-        sameSite: "none",
+        sameSite: "lax",
       });
       res
         .status(200)
