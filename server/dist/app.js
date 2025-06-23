@@ -26,7 +26,10 @@ exports.app.use(express_1.default.json({ limit: "50mb" }));
 exports.app.use((0, cookie_parser_1.default)());
 //cors=>cross origin resource sharing
 exports.app.use((0, cors_1.default)({
-    origin: ["http://localhost:5173"],
+    origin: [
+        "https://codepence-expense-tracker.netlify.app/",
+        "http://localhost:5173",
+    ],
     credentials: true,
 }));
 // Enable response compression to reduce payload size and improve performance
