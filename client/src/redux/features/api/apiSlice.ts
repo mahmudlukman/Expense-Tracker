@@ -18,7 +18,7 @@ export const apiSlice = createApi({
           credentials: "include",
         };
       },
-      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           // If the query is successful, dispatch the userLoggedIn action
