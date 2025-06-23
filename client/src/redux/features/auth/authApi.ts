@@ -22,7 +22,7 @@ export const authApi = apiSlice.injectEndpoints({
         body: data,
         credentials: "include" as const,
       }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           dispatch(
@@ -45,7 +45,7 @@ export const authApi = apiSlice.injectEndpoints({
         },
         credentials: "include" as const,
       }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           dispatch(
@@ -65,9 +65,9 @@ export const authApi = apiSlice.injectEndpoints({
         method: "GET",
         credentials: "include" as const,
       }),
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
         try {
+          await queryFulfilled;
           dispatch(userLoggedOut());
         } catch (error: unknown) {
           console.log(error);
