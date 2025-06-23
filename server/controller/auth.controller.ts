@@ -88,6 +88,9 @@ export const logoutUser = catchAsyncError(
     try {
       res.cookie("access_token", "", {
         maxAge: 1,
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
       });
       res
         .status(200)

@@ -77,6 +77,9 @@ exports.logoutUser = (0, catchAsyncError_1.catchAsyncError)(async (req, res, nex
     try {
         res.cookie("access_token", "", {
             maxAge: 1,
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
         });
         res
             .status(200)
